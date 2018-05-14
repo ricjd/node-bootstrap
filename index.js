@@ -1,5 +1,6 @@
 'use strict';
 
+const common = require('common').init();
 const log = require('./logger');
 const routes = require('./routes');
 
@@ -9,7 +10,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 
-const errorHandler = (error, req, res) => {
+const errorHandler = (error, req, res, next) => {
   log.error(`[${req.method}] ${req.url}: ${ JSON.stringify(req.body) } - ERROR: ${error}`);
   res.status(500);
   res.send(`error: ${error}`);
